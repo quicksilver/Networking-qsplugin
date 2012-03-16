@@ -1,36 +1,25 @@
-About Quicksilver Plugins on Github
-===================================
+# About Quicksilver Plugins on Github #
 
 This repository contains the current source code of a the Quicksilver Plugin / Module. If you're having issues with this plugin, feel free to log them at the [Quicksilver issue tracker](https://github.com/quicksilver/Quicksilver/issues).
 
 Always be sure to check the [Google Groups](http://groups.google.com/group/blacktree-quicksilver/topics?gvc=2) first incase there's a solution to your problem, as well as the [QSApp.com Wiki](http://qsapp.com/wiki/).
 
 
-Before You Try It Out
----------------------
+## Before You Try It Out ##
 
 Before trying out any of these plugins, it's always a good idea to **BACKUP** all of your Quicksilver data.
 
-This is easily done by backing up the following folders 
+This is easily done by backing up the following locations (`~` stands for your home directory, a.k.a. `/Users/you`):
 
-(`<user>` stands for your short user name):
+    ~/Library/Preferences/com.blacktree.Quicksilver.plist
+    ~/Library/Application Support/Quicksilver
+    ~/Library/Caches/Quicksilver
 
-`/Users/<user>/Library/Application Support/Quicksilver`  
-`/Users/<user>/Library/Caches/Quicksilver`
+## Before Building ##
 
-	
-Before Building
----------------
+Before being able to build any of these plugins, you **MUST** download and build the [Quicksilver source code](https://github.com/quicksilver/Quicksilver). This will create some files you need in `/tmp/QS`. Note that to build a plug-in using its Debug configuration, you must first build Quicksilver using the Debug configuration.
 
-Before being able to build any of these plugins, you **MUST** set a new Source Tree for the `QSFramework` in the XCode Preferences.
-
-This is done by going into the XCode preferences, clicking 'Source Trees' and adding a new one with the following options:
-
-Setting Name: `QSFrameworks`  
-Display Name: a suitable name, e.g. `Quicksilver Frameworks`  
-Path: `/Applications/Quicksilver.app/Contents/Frameworks` (or path of Quicksilver.app if different)
-
-For some plugins to compile correctly a source tree must also be set for `QS_SOURCE_ROOT` that points to the location of the [Quicksilver source code](https://github.com/quicksilver/Quicksilver) you've downloaded onto your local machine.
+For some plugins to compile correctly a source tree must also be set for `QS_SOURCE_ROOT` that points to the location of the Quicksilver source you've downloaded onto your local machine.
 
 Setting Name: `QS_SOURCE_ROOT`	
 Display Name: a suitable name, e.g. `Quicksilver source code root`	 
