@@ -44,14 +44,14 @@
 		<string>Rob McBroom</string>
 		<key>categories</key>
 		<array>
-			<string>Applications</string>
+			<string>System</string>
 		</array>
 		<key>description</key>
-		<string>One-line summary for this plug-in</string>
+		<string>Manage wireless connections, locations, etc.</string>
 		<key>extendedDescription</key>
-		<string>HTML formatted documentation for this plug-in.</string>
+		<string>&lt;h1&gt;Quicksilver Networking Plug-in&lt;/h1&gt;</string>
 		<key>icon</key>
-		<string>KEXT</string>
+		<string>GenericNetworkIcon</string>
 	</dict>
 	<key>QSPresetAdditionsTemplate</key>
 	<array>
