@@ -1,0 +1,262 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D4A2796E15137798008F0721 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A2796D15137798008F0721 /* Cocoa.framework */; };
+		D4A2797415137798008F0721 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4A2797215137798008F0721 /* InfoPlist.strings */; };
+		D4A2797E15137798008F0721 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D4A2797D15137798008F0721 /* Release.xcconfig */; };
+		D4A2798315137798008F0721 /* NetworkingAction.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A2798215137798008F0721 /* NetworkingAction.m */; };
+		D4A2798615137798008F0721 /* NetworkingSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A2798515137798008F0721 /* NetworkingSource.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D4A2796A15137798008F0721 /* Networking.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Networking.qsplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4A2796D15137798008F0721 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D4A2797115137798008F0721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = SOURCE_ROOT; };
+		D4A2797315137798008F0721 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4A2797615137798008F0721 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		D4A2797715137798008F0721 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		D4A2797815137798008F0721 /* Developer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Developer.xcconfig; sourceTree = "<group>"; };
+		D4A2797915137798008F0721 /* QSPlugIn.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QSPlugIn.xcconfig; sourceTree = "<group>"; };
+		D4A2797A15137798008F0721 /* QSPlugIn_Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QSPlugIn_Debug.xcconfig; sourceTree = "<group>"; };
+		D4A2797B15137798008F0721 /* QSPlugIn_Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QSPlugIn_Release.xcconfig; sourceTree = "<group>"; };
+		D4A2797C15137798008F0721 /* Quicksilver.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quicksilver.pch; sourceTree = "<group>"; };
+		D4A2797D15137798008F0721 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		D4A2798115137798008F0721 /* NetworkingAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingAction.h; sourceTree = "<group>"; };
+		D4A2798215137798008F0721 /* NetworkingAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkingAction.m; sourceTree = "<group>"; };
+		D4A2798415137798008F0721 /* NetworkingSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingSource.h; sourceTree = "<group>"; };
+		D4A2798515137798008F0721 /* NetworkingSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkingSource.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D4A2796615137798008F0721 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4A2796E15137798008F0721 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D4A2795E15137798008F0721 = {
+			isa = PBXGroup;
+			children = (
+				D4A2796F15137798008F0721 /* Networking */,
+				D4A2796C15137798008F0721 /* Frameworks */,
+				D4A2796B15137798008F0721 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D4A2796B15137798008F0721 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4A2796A15137798008F0721 /* Networking.qsplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4A2796C15137798008F0721 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4A2796D15137798008F0721 /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4A2796F15137798008F0721 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D4A2798115137798008F0721 /* NetworkingAction.h */,
+				D4A2798215137798008F0721 /* NetworkingAction.m */,
+				D4A2798415137798008F0721 /* NetworkingSource.h */,
+				D4A2798515137798008F0721 /* NetworkingSource.m */,
+				D4A2797515137798008F0721 /* Configuration */,
+				D4A2797015137798008F0721 /* Supporting Files */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D4A2797015137798008F0721 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4A2797115137798008F0721 /* Info.plist */,
+				D4A2797215137798008F0721 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D4A2797515137798008F0721 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				D4A2797615137798008F0721 /* Common.xcconfig */,
+				D4A2797715137798008F0721 /* Debug.xcconfig */,
+				D4A2797815137798008F0721 /* Developer.xcconfig */,
+				D4A2797915137798008F0721 /* QSPlugIn.xcconfig */,
+				D4A2797A15137798008F0721 /* QSPlugIn_Debug.xcconfig */,
+				D4A2797B15137798008F0721 /* QSPlugIn_Release.xcconfig */,
+				D4A2797C15137798008F0721 /* Quicksilver.pch */,
+				D4A2797D15137798008F0721 /* Release.xcconfig */,
+			);
+			name = Configuration;
+			path = /tmp/QS/Configuration;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D4A2796915137798008F0721 /* Networking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4A2798915137798008F0721 /* Build configuration list for PBXNativeTarget "Networking" */;
+			buildPhases = (
+				D4A2796515137798008F0721 /* Sources */,
+				D4A2796615137798008F0721 /* Frameworks */,
+				D4A2796715137798008F0721 /* Resources */,
+				D4A2796815137798008F0721 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Networking;
+			productName = Networking;
+			productReference = D4A2796A15137798008F0721 /* Networking.qsplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D4A2796015137798008F0721 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Skurfers’ Alliance";
+			};
+			buildConfigurationList = D4A2796315137798008F0721 /* Build configuration list for PBXProject "Networking" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D4A2795E15137798008F0721;
+			productRefGroup = D4A2796B15137798008F0721 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D4A2796915137798008F0721 /* Networking */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D4A2796715137798008F0721 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4A2797415137798008F0721 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D4A2796815137798008F0721 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/Networking/bltrversion\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D4A2796515137798008F0721 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4A2798315137798008F0721 /* NetworkingAction.m in Sources */,
+				D4A2798615137798008F0721 /* NetworkingSource.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D4A2797215137798008F0721 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4A2797315137798008F0721 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D4A2798715137798008F0721 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4A2797715137798008F0721 /* Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		D4A2798815137798008F0721 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4A2797D15137798008F0721 /* Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		D4A2798A15137798008F0721 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4A2797915137798008F0721 /* QSPlugIn.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D4A2798B15137798008F0721 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4A2797915137798008F0721 /* QSPlugIn.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D4A2796315137798008F0721 /* Build configuration list for PBXProject "Networking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4A2798715137798008F0721 /* Debug */,
+				D4A2798815137798008F0721 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4A2798915137798008F0721 /* Build configuration list for PBXNativeTarget "Networking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4A2798A15137798008F0721 /* Debug */,
+				D4A2798B15137798008F0721 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D4A2796015137798008F0721 /* Project object */;
+}
