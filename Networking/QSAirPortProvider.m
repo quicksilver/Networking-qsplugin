@@ -75,11 +75,8 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
         {
             NSString *ssid = net.ssid;
             NSNumber *priority = net.rssi;
-            NSString *securityString = @"Secure ";
             // this should use kCWSecurityModeOpen instead of 0, but that constant seems to be (null)
-            if ([net.securityMode intValue] == 0) {
-                securityString = @"";
-            }
+            NSString *securityString = ([net.securityMode intValue] == 0) ? @"" : @"Secure ";
             if (net.wirelessProfile)
             {
                 // indicate that this is a preferred network
