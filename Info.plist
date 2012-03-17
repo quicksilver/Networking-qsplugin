@@ -163,19 +163,32 @@
 				<string>Networking</string>
 			</dict>
 		</dict>
-		<key>QSProxiesTemplate</key>
+		<key>QSProxies</key>
 		<dict>
-			<key>NetworkingSomeProxy</key>
+			<key>QSNetworkExternalIPProxy</key>
 			<dict>
 				<key>icon</key>
-				<string>GenericDocumentIcon</string>
+				<string>GenericNetworkIcon</string>
 				<key>name</key>
-				<string>Networking Proxy</string>
+				<string>External IP Address</string>
 				<key>providerClass</key>
 				<string>QSNetworkingSource</string>
 				<key>types</key>
 				<array>
-					<string>QSNetworkingType</string>
+					<string>NSStringPboardType</string>
+				</array>
+			</dict>
+			<key>QSNetworkIPAddressProxy</key>
+			<dict>
+				<key>icon</key>
+				<string>GenericNetworkIcon</string>
+				<key>name</key>
+				<string>IP Address</string>
+				<key>providerClass</key>
+				<string>QSNetworkingSource</string>
+				<key>types</key>
+				<array>
+					<string>NSStringPboardType</string>
 				</array>
 			</dict>
 		</dict>
