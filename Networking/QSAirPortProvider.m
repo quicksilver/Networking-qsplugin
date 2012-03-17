@@ -121,19 +121,6 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 
 @implementation QSAirPortNetworkActionProvider
 
-- (id)init
-{
-	self = [super init];
-	if (self) {
-		NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
-		NSString *powerOn = [NSString stringWithFormat:@"Turn %@ On", technologyName];
-		NSString *powerOff = [NSString stringWithFormat:@"Turn %@ Off", technologyName];
-		[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerEnable"] setName:powerOn];
-		[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerDisable"] setName:powerOff];
-	}
-	return self;
-}
-
 - (QSObject *)enableAirPort
 {
     NSError *error = nil;
@@ -199,11 +186,16 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 {
     if ([dObject containsType:kQSAirPortItemType]) {
         // the wireless interface object
+		NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
         CWInterface *wif = [CWInterface interface];
         if([wif power])
         {
+			NSString *powerOff = [NSString stringWithFormat:@"Turn %@ Off", technologyName];
+			[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerDisable"] setName:powerOff];
             return [NSArray arrayWithObjects:@"QSAirPortPowerDisable", @"QSAirPortDisassociate", nil];
         } else {
+			NSString *powerOn = [NSString stringWithFormat:@"Turn %@ On", technologyName];
+			[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerEnable"] setName:powerOn];
             return [NSArray arrayWithObject:@"QSAirPortPowerEnable"];
         }
     } else if ([dObject containsType:kQSWirelessNetworkType]) {

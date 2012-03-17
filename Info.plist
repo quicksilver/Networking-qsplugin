@@ -89,6 +89,8 @@
 			</array>
 			<key>icon</key>
 			<string>Power</string>
+			<key>name</key>
+			<string>Power Off Wireless Interface</string>
 			<key>precedence</key>
 			<integer>3</integer>
 			<key>validatesObjects</key>
@@ -106,6 +108,8 @@
 			</array>
 			<key>icon</key>
 			<string>Power</string>
+			<key>name</key>
+			<string>Power On Wireless Interface</string>
 			<key>precedence</key>
 			<integer>3</integer>
 			<key>validatesObjects</key>
