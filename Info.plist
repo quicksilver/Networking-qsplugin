@@ -89,8 +89,6 @@
 			</array>
 			<key>icon</key>
 			<string>Power</string>
-			<key>name</key>
-			<string>Turn AirPort Off</string>
 			<key>precedence</key>
 			<integer>3</integer>
 			<key>validatesObjects</key>
@@ -108,8 +106,6 @@
 			</array>
 			<key>icon</key>
 			<string>Power</string>
-			<key>name</key>
-			<string>Turn AirPort On</string>
 			<key>precedence</key>
 			<integer>3</integer>
 			<key>validatesObjects</key>

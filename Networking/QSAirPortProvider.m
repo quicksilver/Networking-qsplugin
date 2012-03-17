@@ -38,19 +38,27 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 
 - (NSArray *)objectsForEntry:(NSDictionary *)theEntry
 {
-    // create a virtual object representing the AirPort interface
-    QSObject *airport = [QSObject objectWithName:@"AirPort"];
-    [airport setDetails:@"AirPort Wireless Networks"];
-    [airport setIcon:[QSResourceManager imageNamed:@"com.apple.airport.airportutility"]];
-    [airport setObject:@"Virtual AirPort Object" forType:kQSAirPortItemType];
-    [airport setIdentifier:@"AirPortNetworks"];
-    [airport setPrimaryType:kQSAirPortItemType];
-    return [NSArray arrayWithObject:airport];
+    // create a virtual object representing the wireless interface
+	QSObject *wireless;
+	if ([NSApplication isLion]) {
+		// AirPort is called Wi-Fi in 10.7+
+		wireless = [QSObject objectWithName:@"Wi-Fi"];
+		[wireless setDetails:@"Wi-Fi Networks"];
+		[wireless setObject:@"Virtual Wi-Fi Object" forType:kQSAirPortItemType];
+	} else {
+		wireless = [QSObject objectWithName:@"AirPort"];
+		[wireless setDetails:@"AirPort Wireless Networks"];
+		[wireless setObject:@"Virtual AirPort Object" forType:kQSAirPortItemType];
+	}
+    [wireless setIcon:[QSResourceManager imageNamed:@"com.apple.airport.airportutility"]];
+    [wireless setIdentifier:@"AirPortNetworks"];
+    [wireless setPrimaryType:kQSAirPortItemType];
+    return [NSArray arrayWithObject:wireless];
 }
 
 - (BOOL)objectHasChildren:(QSObject *)object
 {
-    // only the virtual AirPort object has children (not the networks)
+    // only the virtual wireless object has children (not the networks)
     // nothing to list if the interface is powered off
     return ([object containsType:kQSAirPortItemType] && [[CWInterface interface] power]);
 }
@@ -59,6 +67,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 {
     if ([object containsType:kQSAirPortItemType])
     {
+		NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
         NSMutableArray *objects = [NSMutableArray arrayWithCapacity:1];
         QSObject *newObject = nil;
         NSArray *networks = getAvailableNetworks(); 
@@ -75,13 +84,13 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
             {
                 // indicate that this is a preferred network
                 newObject = [QSObject objectWithName:[NSString stringWithFormat:@"%@ ★", ssid]];
-                [newObject setDetails:[NSString stringWithFormat:@"%@AirPort Network (Preferred)", securityString]];
+                [newObject setDetails:[NSString stringWithFormat:@"%@%@ Network (Preferred)", securityString, technologyName]];
                 // artificially inflate the priority for preferred networks
                 priority = [NSNumber numberWithInt:[priority intValue] + 1000];
             } else {
                 // just use the name
                 newObject = [QSObject objectWithName:ssid];
-                [newObject setDetails:[NSString stringWithFormat:@"%@AirPort Network", securityString]];
+                [newObject setDetails:[NSString stringWithFormat:@"%@%@ Network", securityString, technologyName]];
             }
             [newObject setObject:priority forMeta:@"priority"];
             [newObject setObject:net forType:kQSWirelessNetworkType];
@@ -103,9 +112,8 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
         }
         [object setChildren:[objects sortedArrayUsingFunction:sortNetworkObjects context:NULL]];
         return YES;
-    } else {
-        return NO;
     }
+	return NO;
 }
 
 - (void)setQuickIconForObject:(QSObject *)object
@@ -116,13 +124,26 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 
 @implementation QSAirPortNetworkActionProvider
 
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
+		NSString *powerOn = [NSString stringWithFormat:@"Turn %@ On", technologyName];
+		NSString *powerOff = [NSString stringWithFormat:@"Turn %@ Off", technologyName];
+		[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerEnable"] setName:powerOn];
+		[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerDisable"] setName:powerOff];
+	}
+	return self;
+}
+
 - (QSObject *)enableAirPort
 {
     NSError *error = nil;
     CWInterface *wif = [CWInterface interface];
     BOOL setPowerSuccess = [wif setPower:YES error:&error];
     if (! setPowerSuccess) {
-        NSLog(@"error enabling airport: %@", error);
+        NSLog(@"error enabling wireless interface: %@", error);
     }
     return nil;
 }
@@ -133,7 +154,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
     CWInterface *wif = [CWInterface interface];
     BOOL setPowerSuccess = [wif setPower:NO error:&error];
     if (! setPowerSuccess) {
-        NSLog(@"error disabling airport: %@", error);
+        NSLog(@"error disabling wireless interface: %@", error);
     }
     return nil;
 }
@@ -180,7 +201,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 - (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
 {
     if ([dObject containsType:kQSAirPortItemType]) {
-        // the AirPort object
+        // the wireless interface object
         CWInterface *wif = [CWInterface interface];
         if([wif power])
         {
@@ -189,7 +210,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
             return [NSArray arrayWithObject:@"QSAirPortPowerEnable"];
         }
     } else if ([dObject containsType:kQSWirelessNetworkType]) {
-        // an AirPort network
+        // a wireless network
         CWNetwork *net = [dObject objectForType:kQSWirelessNetworkType];
         if (net.wirelessProfile) {
             // preferred network
