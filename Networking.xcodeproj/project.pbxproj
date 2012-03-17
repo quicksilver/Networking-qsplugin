@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41C31931514D46C00D561C5 /* QSAirPortProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D41C31921514D46C00D561C5 /* QSAirPortProvider.m */; };
+		D41C319D1514D74C00D561C5 /* AirPort.icns in Resources */ = {isa = PBXBuildFile; fileRef = D41C31961514D74C00D561C5 /* AirPort.icns */; };
+		D41C319E1514D74C00D561C5 /* AirPort.scpt in Resources */ = {isa = PBXBuildFile; fileRef = D41C31971514D74C00D561C5 /* AirPort.scpt */; };
+		D41C319F1514D74C00D561C5 /* AirPort0.icns in Resources */ = {isa = PBXBuildFile; fileRef = D41C31981514D74C00D561C5 /* AirPort0.icns */; };
+		D41C31A01514D74C00D561C5 /* AirPort1.icns in Resources */ = {isa = PBXBuildFile; fileRef = D41C31991514D74C00D561C5 /* AirPort1.icns */; };
+		D41C31A11514D74C00D561C5 /* AirPort2.icns in Resources */ = {isa = PBXBuildFile; fileRef = D41C319A1514D74C00D561C5 /* AirPort2.icns */; };
+		D41C31A21514D74C00D561C5 /* AirPort3.icns in Resources */ = {isa = PBXBuildFile; fileRef = D41C319B1514D74C00D561C5 /* AirPort3.icns */; };
+		D41C31A31514D74C00D561C5 /* Power.icns in Resources */ = {isa = PBXBuildFile; fileRef = D41C319C1514D74C00D561C5 /* Power.icns */; };
 		D4A2796E15137798008F0721 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A2796D15137798008F0721 /* Cocoa.framework */; };
 		D4A2797415137798008F0721 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4A2797215137798008F0721 /* InfoPlist.strings */; };
 		D4A2798315137798008F0721 /* NetworkingAction.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A2798215137798008F0721 /* NetworkingAction.m */; };
@@ -14,6 +22,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D41C31911514D46C00D561C5 /* QSAirPortProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSAirPortProvider.h; sourceTree = "<group>"; };
+		D41C31921514D46C00D561C5 /* QSAirPortProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSAirPortProvider.m; sourceTree = "<group>"; };
+		D41C31961514D74C00D561C5 /* AirPort.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort.icns; sourceTree = "<group>"; };
+		D41C31971514D74C00D561C5 /* AirPort.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = AirPort.scpt; sourceTree = "<group>"; };
+		D41C31981514D74C00D561C5 /* AirPort0.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort0.icns; sourceTree = "<group>"; };
+		D41C31991514D74C00D561C5 /* AirPort1.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort1.icns; sourceTree = "<group>"; };
+		D41C319A1514D74C00D561C5 /* AirPort2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort2.icns; sourceTree = "<group>"; };
+		D41C319B1514D74C00D561C5 /* AirPort3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort3.icns; sourceTree = "<group>"; };
+		D41C319C1514D74C00D561C5 /* Power.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Power.icns; sourceTree = "<group>"; };
 		D4A2796A15137798008F0721 /* Networking.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Networking.qsplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A2796D15137798008F0721 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D4A2797115137798008F0721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
@@ -44,6 +61,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D41C31951514D74C00D561C5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D41C31961514D74C00D561C5 /* AirPort.icns */,
+				D41C31971514D74C00D561C5 /* AirPort.scpt */,
+				D41C31981514D74C00D561C5 /* AirPort0.icns */,
+				D41C31991514D74C00D561C5 /* AirPort1.icns */,
+				D41C319A1514D74C00D561C5 /* AirPort2.icns */,
+				D41C319B1514D74C00D561C5 /* AirPort3.icns */,
+				D41C319C1514D74C00D561C5 /* Power.icns */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		D4A2795E15137798008F0721 = {
 			isa = PBXGroup;
 			children = (
@@ -73,11 +104,14 @@
 		D4A2796F15137798008F0721 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D41C31911514D46C00D561C5 /* QSAirPortProvider.h */,
+				D41C31921514D46C00D561C5 /* QSAirPortProvider.m */,
 				D4A2798115137798008F0721 /* NetworkingAction.h */,
 				D4A2798215137798008F0721 /* NetworkingAction.m */,
 				D4A2798415137798008F0721 /* NetworkingSource.h */,
 				D4A2798515137798008F0721 /* NetworkingSource.m */,
 				D4A2797015137798008F0721 /* Supporting Files */,
+				D41C31951514D74C00D561C5 /* Resources */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -160,6 +194,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4A2797415137798008F0721 /* InfoPlist.strings in Resources */,
+				D41C319D1514D74C00D561C5 /* AirPort.icns in Resources */,
+				D41C319E1514D74C00D561C5 /* AirPort.scpt in Resources */,
+				D41C319F1514D74C00D561C5 /* AirPort0.icns in Resources */,
+				D41C31A01514D74C00D561C5 /* AirPort1.icns in Resources */,
+				D41C31A11514D74C00D561C5 /* AirPort2.icns in Resources */,
+				D41C31A21514D74C00D561C5 /* AirPort3.icns in Resources */,
+				D41C31A31514D74C00D561C5 /* Power.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +229,7 @@
 			files = (
 				D4A2798315137798008F0721 /* NetworkingAction.m in Sources */,
 				D4A2798615137798008F0721 /* NetworkingSource.m in Sources */,
+				D41C31931514D46C00D561C5 /* QSAirPortProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
