@@ -69,7 +69,7 @@
 		NSURLResponse *response;
 		NSError *error;
 		NSData *contentData = [NSURLConnection sendSynchronousRequest:req returningResponse:&response error:&error];
-		NSString *content = [[NSString alloc] initWithData:contentData encoding:NSUTF8StringEncoding];
+		NSString *content = [[[NSString alloc] initWithData:contentData encoding:NSUTF8StringEncoding] autorelease];
 		// poor man's parsing :-)
 		NSString *ipRegEx = @"^[:number:]{1,3}\\.[:number:]{1,3}\\.[:number:]{1,3}\\.[:number:]{1,3}$";
 		NSPredicate *ipFilter = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ipRegEx];
