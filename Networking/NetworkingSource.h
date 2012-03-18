@@ -8,6 +8,5 @@
 #define QSNetworkingType @"QSNetworkingType"
 
 @interface QSNetworkingSource : QSObjectSource
-{
-}
+
 @end

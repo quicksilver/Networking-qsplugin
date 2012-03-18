@@ -9,8 +9,4 @@
 
 @implementation QSNetworkingActionProvider
 
-- (QSObject *)performActionOnObject:(QSObject *)dObject
-{
-	return nil;
-}
 @end
