@@ -7,14 +7,9 @@
 #define QSNetworkLocationPasteboardType @"qs.networklocation"
 
 @interface QSNetworkLocationObjectSource : QSObjectSource
-{
-    IBOutlet NSTextField *bundleIDField;
-    IBOutlet NSTextField *keyField;
-    IBOutlet NSPopUpButton *entryTypePopUp;
-}
+
 @end
 
-@interface QSNetworkLocationActionProvider : QSActionProvider{
+@interface QSNetworkLocationActionProvider : QSActionProvider
 
-}
 @end
