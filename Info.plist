@@ -142,9 +142,29 @@
 			<string>System</string>
 		</array>
 		<key>description</key>
-		<string>Manage wireless connections, locations, etc.</string>
+		<string>Manage wireless connections, locations, and get information</string>
 		<key>extendedDescription</key>
-		<string>&lt;h1&gt;Quicksilver Networking Plug-in&lt;/h1&gt;</string>
+		<string>&lt;h2&gt;Quicksilver Networking&lt;/h2&gt;
+&lt;h3&gt;Catalog&lt;/h3&gt;
+&lt;h4&gt;Presets&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Network Locations - Adds any netowrk locations you&apos;ve configured in System Preferences to the catalog. (Disabled by default)&lt;/li&gt;
+&lt;li&gt;Wireless Interface - A virtual entry that represents your Wi-Fi connection. Use this to turn the interface on and off, or to view available networks by hitting → or /. (For 10.6 users, this will appear in the catalog under the name &quot;AirPort&quot;.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Proxy Objects&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;IP Address - The IP address(es) currently assigned to your computer.&lt;/li&gt;
+&lt;li&gt;External IP Address - The IP address remote sites will see when you connect to them.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Actions&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Switch to Location - when a network location is selected in the first pane, this will allow you to set it as the active location.&lt;/li&gt;
+&lt;li&gt;Turn Wi-Fi On - Enable power for the wireless interface. This action is only available when power is off. (The action is named &quot;Turn AirPort On&quot; for 10.6 users.)&lt;/li&gt;
+&lt;li&gt;Turn Wi-Fi Off - Disable power for the wireless interface. This action is only available when power is on. (The action is named &quot;Turn AirPort Off&quot; for 10.6 users.)&lt;/li&gt;
+&lt;li&gt;Disconnect Current Network - Disassociate from the current wireless network, but keep power for the interface on.&lt;/li&gt;
+&lt;li&gt;Connect to Network - Connect to the selected wireless network. This is only available for unsecured networks and secured networks for which you have credentials stored in your keychain.&lt;/li&gt;
+&lt;li&gt;Connect to Network (via Menubar) - For secured networks that can&apos;t be automatically joined, this action will attempt to click through the menu bar to select the network for you, which should result in you being prompted for credentials.&lt;/li&gt;
+&lt;/ul&gt;</string>
 		<key>icon</key>
 		<string>GenericNetworkIcon</string>
 		<key>recommended</key>
