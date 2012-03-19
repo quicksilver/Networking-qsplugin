@@ -13,7 +13,7 @@
 
 - (BOOL)indexIsValidFromDate:(NSDate *)indexDate forEntry:(NSDictionary *)theEntry
 {
-	return NO;
+	return YES;
 }
 
 - (NSImage *)iconForEntry:(NSDictionary *)dict
@@ -21,23 +21,9 @@
 	return [QSResourceManager imageNamed:@"GenericNetworkIcon"];
 }
 
-// Return a unique identifier for an object (if you haven't assigned one before)
-//- (NSString *)identifierForObject:(id <QSObject>)object
-//{
-//	return nil;
-//}
-
 - (NSArray *) objectsForEntry:(NSDictionary *)theEntry
 {
-	NSMutableArray *objects=[NSMutableArray arrayWithCapacity:1];
-	QSObject *newObject;
-	
-	newObject=[QSObject objectWithName:@"TestObject"];
-	[newObject setObject:@"" forType:QSNetworkingType];
-	[newObject setPrimaryType:QSNetworkingType];
-	[objects addObject:newObject];
-	
-	return objects;
+	return nil;
 }
 
 #pragma mark Proxy Objects
