@@ -174,7 +174,8 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
     CWNetwork *net = [dObject objectForType:kQSWirelessNetworkType];
     NSString *scriptPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"AirPort" ofType:@"scpt"];
     NSAppleScript *script = [[NSAppleScript alloc] initWithContentsOfURL:[NSURL fileURLWithPath:scriptPath] error:nil];
-    [script executeSubroutine:@"connect_to_network" arguments:[NSArray arrayWithObjects:net.ssid, nil] error:nil];
+	NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
+    [script executeSubroutine:@"connect_to_network" arguments:[NSArray arrayWithObjects:net.ssid, technologyName, nil] error:nil];
 #ifdef DEBUG
     NSLog(@"Connecting to new network: \"%@\"", net.ssid);
     NSLog(@"ApleScript path: %@", scriptPath);
