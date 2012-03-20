@@ -61,10 +61,10 @@
 		NSPredicate *ipFilter = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ipRegEx];
 		// change all tags from <tag>blah</tag> to |tag|blah|/tag|
 		// replace whitespace with | as well
-		NSArray *replacements = [NSArray arrayWithObjects:@"<", @">", @" ", @"\n", nil];
-		for (NSString *replace in replacements) {
-			content = [content stringByReplacingOccurrencesOfString:replace withString:@"|"];
-		}
+		//NSArray *replacements = [NSArray arrayWithObjects:@"<", @">", @" ", @"\n", nil];
+		//for (NSString *replace in replacements) {
+		//	content = [content stringByReplacingOccurrencesOfString:replace withString:@"|"];
+		//}
 		// split on | and look for an IP address
 		NSArray *contentParts = [content componentsSeparatedByString:@"|"];
 		NSArray *IPs = [contentParts filteredArrayUsingPredicate:ipFilter];
