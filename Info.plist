@@ -370,17 +370,15 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>QSRequirementsTemplate</key>
+	<key>QSRequirements</key>
 	<dict>
-		<key>plugins</key>
+		<key>obsoletes</key>
 		<array>
-			<dict>
-				<key>id</key>
-				<string>com.qsapp.Another.PlugIn</string>
-				<key>name</key>
-				<string>Another Plug-in</string>
-			</dict>
+			<string>com.blacktree.Quicksilver.QSAirPortPlugIn</string>
+			<string>com.blacktree.Quicksilver.QSNetworkLocationPlugIn</string>
 		</array>
+		<key>version</key>
+		<string>3926</string>
 	</dict>
 	<key>QSTriggerAdditionsTemplate</key>
 	<array>
