@@ -6,6 +6,9 @@
 //
 
 #import "NetworkingSource.h"
+#import <sys/socket.h>
+#import <ifaddrs.h>
+#import <netdb.h>
 
 @implementation QSNetworkingSource
 
@@ -33,13 +36,24 @@
 	// local IP address
 	if ([[proxy identifier] isEqualToString:@"QSNetworkIPAddressProxy"]) {
 		NSMutableArray *addresses = [NSMutableArray arrayWithCapacity:1];
-		for (NSString *addr in [[NSHost currentHost] addresses]) {
-			NSArray *octets = [addr componentsSeparatedByString:@"."];
-			if ([[octets objectAtIndex:0] isEqualToString:@"127"]) {
-				continue;
-			}
-			if ([octets count] == 4) {
-				[addresses addObject:addr];
+		NSString *testaddr;
+		struct ifaddrs *addr0, *addr;
+		int family, result;
+		char ipaddr[NI_MAXHOST];
+		if (getifaddrs(&addr0) == -1) {
+			return nil;
+		}
+		for (addr = addr0; addr != NULL; addr = addr->ifa_next) {
+			family = addr->ifa_addr->sa_family;
+			if (family == AF_INET) {
+				result = getnameinfo(addr->ifa_addr, sizeof(struct sockaddr_in), ipaddr, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
+				if (result == 0) {
+					testaddr = [NSString stringWithCString:ipaddr];
+					if ([testaddr hasPrefix:@"127."]) {
+						continue;
+					}
+					[addresses addObject:testaddr];
+				}
 			}
 		}
 		QSObject *localIP = [QSObject makeObjectWithIdentifier:@"QSNetworkIPAddress"];

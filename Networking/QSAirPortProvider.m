@@ -143,6 +143,17 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
     return nil;
 }
 
+- (QSObject *)toggleAirPort
+{
+    NSError *error = nil;
+    CWInterface *wif = [CWInterface interface];
+    BOOL setPowerSuccess = [wif setPower:![wif power] error:&error];
+    if (! setPowerSuccess) {
+        NSLog(@"error toggling wireless interface power: %@", error);
+    }
+    return nil;
+}
+
 - (QSObject *)disassociateAirPort
 {
     [[CWInterface interface] disassociate];
@@ -189,16 +200,21 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
         // the wireless interface object
 		NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
         CWInterface *wif = [CWInterface interface];
+		NSMutableArray *actions = [NSMutableArray arrayWithObject:@"QSAirPortPowerToggle"];
+		NSString *toggle = [NSString stringWithFormat:@"Toggle %@ Power", technologyName];
+		[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerToggle"] setName:toggle];
         if([wif power])
         {
 			NSString *powerOff = [NSString stringWithFormat:@"Turn %@ Off", technologyName];
 			[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerDisable"] setName:powerOff];
-            return [NSArray arrayWithObjects:@"QSAirPortPowerDisable", @"QSAirPortDisassociate", nil];
+			[actions addObject:@"QSAirPortPowerDisable"];
+			[actions addObject:@"QSAirPortDisassociate"];
         } else {
 			NSString *powerOn = [NSString stringWithFormat:@"Turn %@ On", technologyName];
 			[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerEnable"] setName:powerOn];
-            return [NSArray arrayWithObject:@"QSAirPortPowerEnable"];
+			[actions addObject:@"QSAirPortPowerEnable"];
         }
+		return actions;
     } else if ([dObject containsType:kQSWirelessNetworkType]) {
         // a wireless network
         CWNetwork *net = [dObject objectForType:kQSWirelessNetworkType];
