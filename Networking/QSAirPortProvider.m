@@ -76,14 +76,14 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
             NSString *ssid = net.ssid;
             NSNumber *priority = net.rssi;
             // this should use kCWSecurityModeOpen instead of 0, but that constant seems to be (null)
-            NSString *securityString = ([net.securityMode intValue] == 0) ? @"" : @"Secure ";
+            NSString *securityString = ([net.securityMode integerValue] == 0) ? @"" : @"Secure ";
             if (net.wirelessProfile)
             {
                 // indicate that this is a preferred network
                 newObject = [QSObject objectWithName:[NSString stringWithFormat:@"%@ ★", ssid]];
                 [newObject setDetails:[NSString stringWithFormat:@"%@%@ Network (Preferred)", securityString, technologyName]];
                 // artificially inflate the priority for preferred networks
-                priority = [NSNumber numberWithInt:[priority intValue] + 1000];
+                priority = [NSNumber numberWithInteger:[priority integerValue] + 1000];
             } else {
                 // just use the name
                 newObject = [QSObject objectWithName:ssid];
@@ -93,7 +93,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
             [newObject setObject:net forType:kQSWirelessNetworkType];
             [newObject setPrimaryType:kQSWirelessNetworkType];
             [newObject setParentID:[object identifier]];
-            int signal = [net.rssi intValue];
+            NSInteger signal = [net.rssi integerValue];
             if (signal > -70) {
                 [newObject setIcon:[QSResourceManager imageNamed:@"AirPort" inBundle:[NSBundle bundleForClass:[self class]]]];
             } else if (signal > -80) {
@@ -191,6 +191,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
     NSLog(@"Connecting to new network: \"%@\"", net.ssid);
     NSLog(@"ApleScript path: %@", scriptPath);
 #endif
+	[script release];
     return nil;
 }
 

@@ -33,7 +33,7 @@
 		D41C319A1514D74C00D561C5 /* AirPort2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort2.icns; sourceTree = "<group>"; };
 		D41C319B1514D74C00D561C5 /* AirPort3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort3.icns; sourceTree = "<group>"; };
 		D41C319C1514D74C00D561C5 /* Power.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Power.icns; sourceTree = "<group>"; };
-		D4A2796A15137798008F0721 /* Networking.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Networking.qsplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4A2796A15137798008F0721 /* Networking.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Networking.qsplugin; path = "Networking Plugin.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A2796D15137798008F0721 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D4A2797115137798008F0721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		D4A2797315137798008F0721 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -41,8 +41,6 @@
 		D4A2797715137798008F0721 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D4A2797815137798008F0721 /* Developer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Developer.xcconfig; sourceTree = "<group>"; };
 		D4A2797915137798008F0721 /* QSPlugIn.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QSPlugIn.xcconfig; sourceTree = "<group>"; };
-		D4A2797A15137798008F0721 /* QSPlugIn_Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QSPlugIn_Debug.xcconfig; sourceTree = "<group>"; };
-		D4A2797B15137798008F0721 /* QSPlugIn_Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = QSPlugIn_Release.xcconfig; sourceTree = "<group>"; };
 		D4A2797C15137798008F0721 /* Quicksilver.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quicksilver.pch; sourceTree = "<group>"; };
 		D4A2797D15137798008F0721 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D4A2798115137798008F0721 /* NetworkingAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingAction.h; sourceTree = "<group>"; };
@@ -141,13 +139,11 @@
 				D4A2797715137798008F0721 /* Debug.xcconfig */,
 				D4A2797815137798008F0721 /* Developer.xcconfig */,
 				D4A2797915137798008F0721 /* QSPlugIn.xcconfig */,
-				D4A2797A15137798008F0721 /* QSPlugIn_Debug.xcconfig */,
-				D4A2797B15137798008F0721 /* QSPlugIn_Release.xcconfig */,
 				D4A2797C15137798008F0721 /* Quicksilver.pch */,
 				D4A2797D15137798008F0721 /* Release.xcconfig */,
 			);
 			name = Configuration;
-			path = /tmp/QS/Configuration;
+			path = /private/tmp/QS/Configuration;
 			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
@@ -275,7 +271,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4A2797915137798008F0721 /* QSPlugIn.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME) Plugin";
 			};
 			name = Debug;
 		};
@@ -283,7 +279,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D4A2797915137798008F0721 /* QSPlugIn.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME) Plugin";
 			};
 			name = Release;
 		};

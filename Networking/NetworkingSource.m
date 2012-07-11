@@ -38,7 +38,7 @@
 		NSMutableArray *addresses = [NSMutableArray arrayWithCapacity:1];
 		NSString *testaddr;
 		struct ifaddrs *addr0, *addr;
-		int family, result;
+		NSInteger family, result;
 		char ipaddr[NI_MAXHOST];
 		if (getifaddrs(&addr0) == -1) {
 			return nil;
@@ -48,7 +48,7 @@
 			if (family == AF_INET) {
 				result = getnameinfo(addr->ifa_addr, sizeof(struct sockaddr_in), ipaddr, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
 				if (result == 0) {
-					testaddr = [NSString stringWithCString:ipaddr];
+					testaddr = [NSString stringWithCString:ipaddr encoding:NSUTF8StringEncoding];
 					if ([testaddr hasPrefix:@"127."]) {
 						continue;
 					}
