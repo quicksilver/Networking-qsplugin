@@ -191,6 +191,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
     NSLog(@"Connecting to new network: \"%@\"", net.ssid);
     NSLog(@"ApleScript path: %@", scriptPath);
 #endif
+	[script release];
     return nil;
 }
 
