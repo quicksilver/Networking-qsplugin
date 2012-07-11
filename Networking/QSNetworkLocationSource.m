@@ -17,7 +17,7 @@
 
 - (BOOL)indexIsValidFromDate:(NSDate *)indexDate forEntry:(NSDictionary *)theEntry
 {
-	NSDate *modDate = [[[NSFileManager defaultManager] fileAttributesAtPath:@"/Library/Preferences/SystemConfiguration/preferences.plist" traverseLink:YES] fileModificationDate];
+	NSDate *modDate = [[[NSFileManager defaultManager] attributesOfItemAtPath:[@"/Library/Preferences/SystemConfiguration/preferences.plist" stringByResolvingSymlinksInPath] error:nil] fileModificationDate];
 	return [modDate compare:indexDate] == NSOrderedAscending;
 }
 
