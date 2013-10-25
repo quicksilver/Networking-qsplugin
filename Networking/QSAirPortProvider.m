@@ -1,18 +1,20 @@
 #import "QSAirPortProvider.h"
 #import <CoreWLAN/CoreWLAN.h>
 
-NSArray *getAvailableNetworks(void)
-{
-    // scan for currently available wireless networks
-    // retrun the entire network object
-    NSMutableArray *available = [NSMutableArray arrayWithCapacity:1];
-    NSError *error = nil;
-    CWInterface *wif = [CWInterface interface];
-    for (CWNetwork *net in [wif scanForNetworksWithParameters:nil error:&error])
-    {
-        [available addObject:net];
+// Taken from http://stackoverflow.com/questions/4869416/keychain-access-required-for-displaying-list-of-known-wifi-networks-in-osx-app
+BOOL networkIsPreferredForInterface(CWNetwork *network, CWInterface *wif) {
+    NSOrderedSet *profiles = wif.configuration.networkProfiles;
+    for (CWNetworkProfile *profile in profiles) {
+        if ([network.ssid isEqualToString:profile.ssid] && [network.ssidData isEqualToData:profile.ssidData] && [network supportsSecurity:profile.security]) {
+            return YES;
+        }
     }
-    return available;
+    return NO;
+}
+
+BOOL isEnterpriseNetwork(CWNetwork *network) {
+ 
+    return [network supportsSecurity:kCWSecurityWPAEnterprise] || [network supportsSecurity:kCWSecurityWPAEnterpriseMixed] || [network supportsSecurity:kCWSecurityWPA2Enterprise] || [network supportsSecurity:kCWSecurityEnterprise];
 }
 
 NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
@@ -30,6 +32,25 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 }
 
 @implementation QSAirPortNetworkObjectSource
+
+
+
+-(NSArray *)availableNetworksForInterface:(CWInterface *)wif {
+    // scan for currently available wireless networks
+    // retrun the entire network object
+    NSMutableArray *available = [NSMutableArray arrayWithCapacity:1];
+    NSError *error = nil;
+    NSSet *networks = [wif scanForNetworksWithSSID:nil error:&error];
+    if (error) {
+        QSShowAppNotifWithAttributes(@"AirportPlugin", NSLocalizedStringFromTableInBundle(@"Airport Scanning Failed", nil, [NSBundle bundleForClass:[self class]], nil), [error localizedDescription]);
+        return nil;
+    }
+    for (CWNetwork *net in networks)
+    {
+        [available addObject:net];
+    }
+    return available;
+}
 
 - (NSImage *)iconForEntry:(NSDictionary *)dict
 {
@@ -60,7 +81,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 {
     // only the virtual wireless object has children (not the networks)
     // nothing to list if the interface is powered off
-    return ([object containsType:kQSAirPortItemType] && [[CWInterface interface] power]);
+    return ([object containsType:kQSAirPortItemType] && [[CWInterface interface] powerOn]);
 }
 
 - (BOOL)loadChildrenForObject:(QSObject *)object
@@ -70,30 +91,31 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 		NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
         NSMutableArray *objects = [NSMutableArray arrayWithCapacity:1];
         QSObject *newObject = nil;
-        NSArray *networks = getAvailableNetworks(); 
+        CWInterface *wif = [CWInterface interface];
+        NSArray *networks = [self availableNetworksForInterface:wif];
         for(CWNetwork *net in networks)
         {
             NSString *ssid = net.ssid;
-            NSNumber *priority = net.rssi;
+            NSInteger priority = net.rssiValue;
             // this should use kCWSecurityModeOpen instead of 0, but that constant seems to be (null)
-            NSString *securityString = ([net.securityMode integerValue] == 0) ? @"" : @"Secure ";
-            if (net.wirelessProfile)
+            NSString *securityString = [net supportsSecurity:kCWSecurityNone] ? @"" : @"Secure ";
+            if (networkIsPreferredForInterface(net, wif))
             {
                 // indicate that this is a preferred network
                 newObject = [QSObject objectWithName:[NSString stringWithFormat:@"%@ ★", ssid]];
                 [newObject setDetails:[NSString stringWithFormat:@"%@%@ Network (Preferred)", securityString, technologyName]];
                 // artificially inflate the priority for preferred networks
-                priority = [NSNumber numberWithInteger:[priority integerValue] + 1000];
+                priority = priority + 1000;
             } else {
                 // just use the name
                 newObject = [QSObject objectWithName:ssid];
                 [newObject setDetails:[NSString stringWithFormat:@"%@%@ Network", securityString, technologyName]];
             }
-            [newObject setObject:priority forMeta:@"priority"];
+            [newObject setObject:[NSNumber numberWithInteger:priority] forMeta:@"priority"];
             [newObject setObject:net forType:kQSWirelessNetworkType];
             [newObject setPrimaryType:kQSWirelessNetworkType];
             [newObject setParentID:[object identifier]];
-            NSInteger signal = [net.rssi integerValue];
+            NSInteger signal = net.rssiValue;
             if (signal > -70) {
                 [newObject setIcon:[QSResourceManager imageNamed:@"AirPort" inBundle:[NSBundle bundleForClass:[self class]]]];
             } else if (signal > -80) {
@@ -147,7 +169,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 {
     NSError *error = nil;
     CWInterface *wif = [CWInterface interface];
-    BOOL setPowerSuccess = [wif setPower:![wif power] error:&error];
+    BOOL setPowerSuccess = [wif setPower:![wif powerOn] error:&error];
     if (! setPowerSuccess) {
         NSLog(@"error toggling wireless interface power: %@", error);
     }
@@ -166,17 +188,41 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
     NSLog(@"Switching to network: \"%@\"", [dObject name]);
 #endif
     
-    NSError *error = nil;
     CWInterface *wif = [CWInterface interface];
     CWNetwork *net = [dObject objectForType:kQSWirelessNetworkType];
-    NSString *passphrase = [net.wirelessProfile passphrase];
-    NSDictionary *params = nil;
-    if (passphrase != nil) {
-        params = [NSDictionary dictionaryWithObjectsAndKeys:passphrase, kCWAssocKeyPassphrase, nil];
+    OSStatus err = 0;
+    if (isEnterpriseNetwork(net)) {
+        SecIdentityRef identity = nil;
+        err = CWKeychainCopyEAPIdentity((CFDataRef)net.ssidData, &identity);
+        if (!err) {
+            NSString *username = nil;
+            NSString *password = nil;
+            err = CWKeychainCopyEAPUsernameAndPassword((CFDataRef)net.ssidData, (CFStringRef *)&username, (CFStringRef *)&password);
+            if (!err) {
+                NSError *error;
+                [wif associateToEnterpriseNetwork:net identity:identity username:username password:password error:&error];
+                if (error) {
+                    NSLog(@"Failed to connect to network %@\%@", net.bssid, error);
+                }
+            }
+            [username release];
+            [password release];
+            if (identity != nil) {
+                CFRelease(identity);
+            }
+        }
+    } else {
+        NSString *password = nil;
+        if (![net supportsSecurity:kCWSecurityNone]) {
+            CWKeychainCopyPassword((CFDataRef)net.ssidData, (CFStringRef *)&password);
+            [password autorelease];
+        }
+        NSError *error = nil;
+        [wif associateToNetwork:net password:password error:&error];
+        if (error) {
+            NSLog(@"Failed to connect to network %@\%@", net.bssid, error);
+        }
     }
-    
-    [wif associateToNetwork:net parameters:params error:&error];
-    
     return nil;
 }
 
@@ -197,14 +243,14 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
 
 - (NSArray *)validActionsForDirectObject:(QSObject *)dObject indirectObject:(QSObject *)iObject
 {
+    CWInterface *wif = [CWInterface interface];
     if ([dObject containsType:kQSAirPortItemType]) {
         // the wireless interface object
 		NSString *technologyName = [NSApplication isLion] ? @"Wi-Fi" : @"AirPort";
-        CWInterface *wif = [CWInterface interface];
 		NSMutableArray *actions = [NSMutableArray arrayWithObject:@"QSAirPortPowerToggle"];
 		NSString *toggle = [NSString stringWithFormat:@"Toggle %@ Power", technologyName];
 		[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerToggle"] setName:toggle];
-        if([wif power])
+        if([wif powerOn])
         {
 			NSString *powerOff = [NSString stringWithFormat:@"Turn %@ Off", technologyName];
 			[(QSAction *)[QSAction actionWithIdentifier:@"QSAirPortPowerDisable"] setName:powerOff];
@@ -219,7 +265,7 @@ NSInteger sortNetworkObjects(QSObject *net1, QSObject *net2, void *context)
     } else if ([dObject containsType:kQSWirelessNetworkType]) {
         // a wireless network
         CWNetwork *net = [dObject objectForType:kQSWirelessNetworkType];
-        if (net.wirelessProfile) {
+        if (networkIsPreferredForInterface(net, wif)) {
             // preferred network
             return [NSArray arrayWithObject:@"QSAirPortNetworkSelectAction"];
         } else {
