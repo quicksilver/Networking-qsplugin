@@ -1,8 +1,6 @@
 #import "QSAirPortProvider.h"
 #import <CoreWLAN/CoreWLAN.h>
 
-#define kConfigPath @"/Library/Preferences/SystemConfiguration/preferences.plist";
-
 // Taken from http://stackoverflow.com/questions/4869416/keychain-access-required-for-displaying-list-of-known-wifi-networks-in-osx-app
 BOOL networkIsPreferredForInterface(CWNetwork *network, CWInterface *wif) {
     NSOrderedSet *profiles = wif.configuration.networkProfiles;
