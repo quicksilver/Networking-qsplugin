@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.2.0</string>
 	<key>CFBundleVersion</key>
-	<string>9</string>
+	<string>A</string>
 	<key>QSActions</key>
 	<dict>
 		<key>QSAirPortDisassociate</key>
@@ -402,7 +402,7 @@
 			<string>com.blacktree.Quicksilver.QSNetworkLocationPlugIn</string>
 		</array>
 		<key>version</key>
-		<string>3926</string>
+		<string>4001</string>
 	</dict>
 	<key>QSTriggerAdditionsTemplate</key>
 	<array>

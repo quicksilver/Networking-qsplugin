@@ -33,7 +33,7 @@
 		D41C319A1514D74C00D561C5 /* AirPort2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort2.icns; sourceTree = "<group>"; };
 		D41C319B1514D74C00D561C5 /* AirPort3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AirPort3.icns; sourceTree = "<group>"; };
 		D41C319C1514D74C00D561C5 /* Power.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Power.icns; sourceTree = "<group>"; };
-		D4A2796A15137798008F0721 /* Networking.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Networking.qsplugin; path = "Networking Plugin.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4A2796A15137798008F0721 /* Networking.qsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Networking.qsplugin; path = "Networking Plugin.qsplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A2796D15137798008F0721 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D4A2797115137798008F0721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		D4A2797315137798008F0721 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -154,9 +154,9 @@
 			buildConfigurationList = D4A2798915137798008F0721 /* Build configuration list for PBXNativeTarget "Networking" */;
 			buildPhases = (
 				D4A2796515137798008F0721 /* Sources */,
+				D4A2796815137798008F0721 /* Update Version and Documentation */,
 				D4A2796615137798008F0721 /* Frameworks */,
 				D4A2796715137798008F0721 /* Resources */,
-				D4A2796815137798008F0721 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -212,18 +212,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D4A2796815137798008F0721 /* ShellScript */ = {
+		D4A2796815137798008F0721 /* Update Version and Documentation */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Update Version and Documentation";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/Networking/bltrversion\" \"$INFOPLIST_FILE\"";
+			shellScript = "\"$QS_BUILD_ROOT/Tools/bltrversion\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
