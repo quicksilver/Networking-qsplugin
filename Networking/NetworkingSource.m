@@ -64,7 +64,7 @@
 	}
 	// remote IP address
 	if ([[proxy identifier] isEqualToString:@"QSNetworkExternalIPProxy"]) {
-		NSURL *IPService = [NSURL URLWithString:@"http://qs0.qsapp.com/plugin-data/external-ip.php"];
+		NSURL *IPService = [NSURL URLWithString:@"https://qs0.qsapp.com/plugin-data/external-ip.php"];
 		NSURLRequest *req = [NSURLRequest requestWithURL:IPService cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:5];
 		NSURLResponse *response;
 		NSError *error;
