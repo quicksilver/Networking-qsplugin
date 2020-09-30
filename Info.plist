@@ -428,5 +428,10 @@
 			<string>Networking</string>
 		</dict>
 	</array>
+	<key>QSDefaults</key>
+	<dict>
+		<key>QSExternalIPSource</key>
+		<string>http://plain-text-ip.com/</string>
+	</dict>
 </dict>
 </plist>
