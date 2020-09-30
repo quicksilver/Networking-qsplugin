@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>BNDL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.1</string>
+	<string>1.3.0</string>
 	<key>CFBundleVersion</key>
-	<string>B</string>
+	<string>C</string>
 	<key>QSActions</key>
 	<dict>
 		<key>QSAirPortDisassociate</key>
