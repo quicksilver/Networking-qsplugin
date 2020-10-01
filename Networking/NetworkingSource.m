@@ -71,24 +71,15 @@
 		NSError *error;
 		NSData *contentData = [NSURLConnection sendSynchronousRequest:req returningResponse:&response error:&error];
 		NSString *content = [[[NSString alloc] initWithData:contentData encoding:NSUTF8StringEncoding] autorelease];
-		// poor man's parsing :-)
-		NSString *ipRegEx = @"^[:number:]{1,3}\\.[:number:]{1,3}\\.[:number:]{1,3}\\.[:number:]{1,3}$";
-		NSPredicate *ipFilter = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", ipRegEx];
-		// change all tags from <tag>blah</tag> to |tag|blah|/tag|
-		// replace whitespace with | as well
-		//NSArray *replacements = [NSArray arrayWithObjects:@"<", @">", @" ", @"\n", nil];
-		//for (NSString *replace in replacements) {
-		//	content = [content stringByReplacingOccurrencesOfString:replace withString:@"|"];
-		//}
-		// split on | and look for an IP address
-		NSArray *contentParts = [content componentsSeparatedByString:@"|"];
-		NSArray *IPs = [contentParts filteredArrayUsingPredicate:ipFilter];
+		content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSRegularExpression *ipRegEx = [NSRegularExpression regularExpressionWithPattern:@"^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$" options:0 error:nil];
+		NSUInteger matches = [ipRegEx numberOfMatchesInString:content options:0 range:NSMakeRange(0, content.length)];
 		// return the first match
-		if ([IPs count]) {
+		if (matches) {
 			QSObject *externalIP = [QSObject makeObjectWithIdentifier:@"QSNetworkExternalIP"];
 			[externalIP setName:@"External IP Address"];
-			[externalIP setDetails:[IPs objectAtIndex:0]];
-			[externalIP setObject:[IPs objectAtIndex:0] forType:QSTextType];
+			[externalIP setDetails:content];
+			[externalIP setObject:content forType:QSTextType];
 			return externalIP;
 		}
 	}
