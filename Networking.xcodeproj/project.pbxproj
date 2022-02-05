@@ -154,7 +154,6 @@
 			buildConfigurationList = D4A2798915137798008F0721 /* Build configuration list for PBXNativeTarget "Networking" */;
 			buildPhases = (
 				D4A2796515137798008F0721 /* Sources */,
-				D4A2796815137798008F0721 /* Update Version and Documentation */,
 				D4A2796615137798008F0721 /* Frameworks */,
 				D4A2796715137798008F0721 /* Resources */,
 			);
@@ -175,12 +174,18 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Skurfers’ Alliance";
+				TargetAttributes = {
+					D4A2796915137798008F0721 = {
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = D4A2796315137798008F0721 /* Build configuration list for PBXProject "Networking" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = D4A2795E15137798008F0721;
@@ -210,23 +215,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D4A2796815137798008F0721 /* Update Version and Documentation */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update Version and Documentation";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"$QS_BUILD_ROOT/Tools/bltrversion\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D4A2796515137798008F0721 /* Sources */ = {
