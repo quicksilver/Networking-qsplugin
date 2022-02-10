@@ -68,8 +68,13 @@
 		NSURL *IPService = [NSURL URLWithString:externalIPSource];
 		NSURLRequest *req = [NSURLRequest requestWithURL:IPService cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:5];
 		NSURLResponse *response;
-		NSError *error;
+		NSError *error = nil;
 		NSData *contentData = [NSURLConnection sendSynchronousRequest:req returningResponse:&response error:&error];
+		if (error) {
+			NSLog(@"Error retrieving external IP address: %@", error);
+			NSBeep();
+			return nil;
+		}
 		NSString *content = [[[NSString alloc] initWithData:contentData encoding:NSUTF8StringEncoding] autorelease];
 		content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		NSRegularExpression *ipRegEx = [NSRegularExpression regularExpressionWithPattern:@"^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$" options:0 error:nil];
