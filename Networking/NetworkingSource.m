@@ -60,6 +60,7 @@
 		[localIP setName:@"IP Address"];
 		[localIP setDetails:[addresses componentsJoinedByString:@", "]];
 		[localIP setObject:[addresses componentsJoinedByString:@" "] forType:QSTextType];
+		[localIP setIcon:[QSResourceManager imageNamed:@"GenericNetworkIcon"]];
 		return localIP;
 	}
 	// remote IP address
@@ -85,6 +86,7 @@
 			[externalIP setName:@"External IP Address"];
 			[externalIP setDetails:content];
 			[externalIP setObject:content forType:QSTextType];
+			[externalIP setIcon:[QSResourceManager imageNamed:@"GenericNetworkIcon"]];
 			return externalIP;
 		}
 	}
